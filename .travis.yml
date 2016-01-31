@@ -19,3 +19,11 @@ notifications:
 env:
   global:
     - secure: "VfJq/lzfekhZ4+gcHig92C2HFXa+0FgQHjTr8GgUHiIkzKp0X6jy+3J6yfTu60ova2zmZkkT8EWW0HTQk4+0zkq2Rk63BJX1yuCUgABwTV1fNmebREp4OQ6GDMMxudmMjgcg+cvO4SokshPtqLPnOeyzSoCfF86G6RVf+UZ6CLM="
+
+deploy:
+  provider: releases
+  api_key: "914e6b0954a36f11bb77f912e0b6c1ce86a41f49"
+  file: "/home/travis/build/OxideMod/OxidePatcher/OxidePatcher/bin/Release/OxidePatcher.exe"
+  skip_cleanup: true
+  on:
+    tags: true
