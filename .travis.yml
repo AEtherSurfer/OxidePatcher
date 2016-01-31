@@ -1,29 +1,22 @@
 sudo: false
 language: csharp
-
-# Add build number to version
-before_script: sed -ri "s/Version\(\"(.*).0.0\"\)/Version(\"\1.${TRAVIS_BUILD_NUMBER}.0\")/g" OxidePatcher/Properties/AssemblyInfo.cs
-
-# Build the project
+before_script: sed -ri "s/Version\(\"(.*).0.0\"\)/Version(\"\1.${TRAVIS_BUILD_NUMBER}.0\")/g"
+  OxidePatcher/Properties/AssemblyInfo.cs
 solution: OxidePatcher.sln /p:win32Icon="Resources/logo.ico"
-
-# Run deployment script
-after_success: "[[ $TRAVIS_PULL_REQUEST == false ]] && [[ $TRAVIS_REPO_SLUG == AEtherSurfer/OxidePatcher ]] && [[ $TRAVIS_BRANCH == master ]] && ./deploy.sh"
-
+after_success: "[[ $TRAVIS_PULL_REQUEST == false ]] && [[ $TRAVIS_REPO_SLUG == AEtherSurfer/OxidePatcher
+  ]] && [[ $TRAVIS_BRANCH == master ]] && ./deploy.sh"
 notifications:
   email: false
   slack:
     rooms:
-      secure: "DWK6rjmy/bTeJ4eBcYDjjmjavPVANlHPlh5orhQQNq/kuKHPomvILM4c5rs6h/ajXX7QA1PC0zjdJqdfRxU9lHxP8VWZSq1AIV/aF8nKOQQGKkqjOb6k+hDA0q1UrhzP52cBmJJnOVhZ3mqZGBwzuvDlCNuBMRD/JwongNz8D/k="
-
+      secure: DWK6rjmy/bTeJ4eBcYDjjmjavPVANlHPlh5orhQQNq/kuKHPomvILM4c5rs6h/ajXX7QA1PC0zjdJqdfRxU9lHxP8VWZSq1AIV/aF8nKOQQGKkqjOb6k+hDA0q1UrhzP52cBmJJnOVhZ3mqZGBwzuvDlCNuBMRD/JwongNz8D/k=
 env:
   global:
-    - secure: "VfJq/lzfekhZ4+gcHig92C2HFXa+0FgQHjTr8GgUHiIkzKp0X6jy+3J6yfTu60ova2zmZkkT8EWW0HTQk4+0zkq2Rk63BJX1yuCUgABwTV1fNmebREp4OQ6GDMMxudmMjgcg+cvO4SokshPtqLPnOeyzSoCfF86G6RVf+UZ6CLM="
-
+  - secure: VfJq/lzfekhZ4+gcHig92C2HFXa+0FgQHjTr8GgUHiIkzKp0X6jy+3J6yfTu60ova2zmZkkT8EWW0HTQk4+0zkq2Rk63BJX1yuCUgABwTV1fNmebREp4OQ6GDMMxudmMjgcg+cvO4SokshPtqLPnOeyzSoCfF86G6RVf+UZ6CLM=
 deploy:
   provider: releases
-  api_key: "914e6b0954a36f11bb77f912e0b6c1ce86a41f49"
-  file: "/home/travis/build/AEtherSurfer/OxidePatcher/OxidePatcher/bin/Release/OxidePatcher.exe"
-  skip_cleanup: true
+  api_key:
+    secure: dkMXGydTt5bi2EKZqqtBrcMe/e/gBaRanlFXkP/tPBETkFK8carB/nbGbQfmsFDmIRscWJrQD+wjq5FC9sukZ/ARSzkC/0ULlYJkkINhvjDjUypIaxhPniarOFqpmKXVHkYRfARctA9oI/4tEuumEXv5G+tLDVHxQBbcHarPYXDt3lHfnBvRDFAXrnwPh4vqrugEChb/b4EHZm1p2sC5Z1RiknMF1tWO+2b9oB1yATol0cUWQ22y9jIY8v/m7eRg1iWPk0PLXu1AjBbWdZPLatLDxmwUN+SXMSJxs7epgDebCXTRjF0OrQUUECn5wiv6IQxV222zV2WhH1//Ou/zxcSEZ8QV+YYbSBFVan0z7uq+pJii75+WR3AGIZ3slSTr+XLl/YGV3KJckxbuCRnQSwV6GDvDtxqXNhXCzqe0uYfulq7mqOKF+zjgYeEqnExbTO/prO9RzETtyhccSWJRuGdaoCoBcFQSjjOets8tNu7pwj2D4cvoTE2GAhjfljzifR+NIRstc0ROQ1s26qOBrmY2BVarox8YboInS/Te4OcRhDAEcTAAzGvqh6Ey1RK9MqzJihmGSpO8xECMWsybNJFUmTKW/Njz0zfNCGvMfSo0kl7FgUlsBNF/SVpuzaEn8/2+vfA3QObBEhJ5GaveAMTWUoSlgbDeqNI/3R6SJQ0=
+  file: bin/Release/OxidePatcher.exe
   on:
-    tags: true
+    repo: AEtherSurfer/OxidePatcher
